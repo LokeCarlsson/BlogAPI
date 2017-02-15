@@ -4,10 +4,7 @@
   "description": "Restful API",
   "main": "dist",
   "scripts": {
-    "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
-    "build": "babel src -s -D -d dist --presets es2015,stage-0",
-    "start": "node dist",
-    "prestart": "npm run -s build",
+    "start": "eslint src && nodemon src/server.js --exec babel-node --presets es2015,stage-2",
     "test": "eslint src"
   },
   "eslintConfig": {
@@ -24,23 +21,32 @@
       "no-unused-vars": 1
     }
   },
-  "repository": "developit/express-es6-rest-api",
   "author": "Loke Carlsson",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1dv527/lc222ak-examination-2.git"
+  },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.13.3",
     "compression": "^1.5.2",
     "cors": "^2.7.1",
+    "crypto": "0.0.3",
     "express": "^4.13.3",
+    "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.8.2",
-    "morgan": "^1.8.0",
+    "morgan": "^1.8.1",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0",
     "resource-router-middleware": "^0.6.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.9.0",
-    "babel-core": "^6.9.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0",
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
     "eslint": "^3.1.1",
     "nodemon": "^1.9.2"
   }
