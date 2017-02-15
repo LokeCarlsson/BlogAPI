@@ -11,8 +11,6 @@ const REQUIRE_OWNER = "Owner"
 const REQUIRE_CLIENT = "Client"
 const REQUIRE_MEMBER = "Member"
 
-
-
 function router (app) {
   const router = express.Router()
 
