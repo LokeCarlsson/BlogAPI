@@ -5,9 +5,12 @@ import router 			from './router'
 import morgan 			from 'morgan'
 import http 				from 'http'
 import cors 				from 'cors'
+import mongoose			from 'mongoose'
 
 let app = express()
 app.server = http.createServer(app)
+
+mongoose.connect(config.database)
 
 // app.use(morgan('dev', {
 //   skip: function (req, res) { return res.statusCode < 400 }
@@ -22,9 +25,8 @@ app.use(bodyParser.json())
 
 router(app)
 
-app.server.listen(process.env.PORT || config.port)
-
-console.log('Server listening on port 8080')
-
+app.server.listen(config.port || 3000, function () {
+	console.log('Server listening on port ', config.port)
+})
 
 export default app
