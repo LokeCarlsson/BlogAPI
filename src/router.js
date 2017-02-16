@@ -14,10 +14,10 @@ const REQUIRE_MEMBER = "Member"
 function router (app) {
   const router = express.Router()
 
-  // router.post('/register', register)
-  // router.get('/register', (req, res, next) => {
-  //   res.status(200).send('Registration!')
-  // })
+  router.post('/register', register)
+  router.get('/register', (req, res, next) => {
+    res.status(200).send('Registration!')
+  })
 
   router.post('/login', requireLogin, login)
   router.get('/login', (req, res, next) => {
