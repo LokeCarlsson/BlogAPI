@@ -19,10 +19,10 @@ function setUserInfo(request) {
 }
 
 function register (req, res, next) {
-  const email = req.body.email;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const password = req.body.password;
+  const email = req.body.email
+  const firstName = req.body.firstName
+  const lastName = req.body.lastName
+  const password = req.body.password
 
   if (!email)
   return res.status(422).send({ error: 'You must provide an email address.'})
@@ -88,4 +88,4 @@ function roleAuthorization (role) {
   }
 }
 
-export { login }
+export { login, register }
