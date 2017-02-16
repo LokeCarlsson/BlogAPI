@@ -16,12 +16,12 @@ function router (app) {
 
   router.post('/register', register)
   router.get('/register', (req, res, next) => {
-    res.status(200).send('Registration!')
+    res.status(200).send('Register your account by posting to this URL!')
   })
 
   router.post('/login', requireLogin, login)
   router.get('/login', (req, res, next) => {
-    res.status(200).send('Login!')
+    res.status(200).send('Login by posting to this URL!')
   })
 
   app.use('/', router)
