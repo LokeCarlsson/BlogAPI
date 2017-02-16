@@ -22,6 +22,14 @@ function router (app) {
     res.status(405).send('Post on this URL to login!')
   })
 
+  router.get('/protected', requireAuth, (req, res, next) => {
+    res.status(200).send('This URL is protected!')
+  })
+
+  router.get('/secret', requireAuth, (req, res, next) => {
+    res.status(200).send('This URL is secret!')
+  })
+
   app.use('/', router)
 }
 
