@@ -1,4 +1,4 @@
-import { login, register} from './controllers/authentication'
+import { login, register, roleAuthorization } from './controllers/authentication'
 import express from 'express'
 import passportService from './config/passport'
 import passport from 'passport'
@@ -28,6 +28,10 @@ function router (app) {
 
   router.get('/secret', requireAuth, (req, res, next) => {
     res.status(200).send('This URL is secret!')
+  })
+
+  router.get('/admin', requireAuth, roleAuthorization(REQUIRE_ADMIN), (req, res, next) => {
+    res.status(200).send('This URL is only for admins!')
   })
 
   app.use('/', router)

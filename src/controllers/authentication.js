@@ -88,4 +88,4 @@ function roleAuthorization (role) {
   }
 }
 
-export { login, register }
+export { login, register, roleAuthorization }
