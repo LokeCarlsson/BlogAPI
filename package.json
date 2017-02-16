@@ -32,7 +32,6 @@
     "body-parser": "^1.13.3",
     "compression": "^1.5.2",
     "cors": "^2.7.1",
-    "crypto": "0.0.3",
     "express": "^4.13.3",
     "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.8.2",

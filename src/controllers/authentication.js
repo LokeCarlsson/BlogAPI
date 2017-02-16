@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-import crypto from 'crypto'
 import User from '../models/user'
 import config from '../config/main'
 
