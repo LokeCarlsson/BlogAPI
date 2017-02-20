@@ -1,5 +1,5 @@
 import { login, register, roleAuthorization } from './controllers/authController'
-import { post, getPosts } from './controllers/postController'
+import { post, getPosts, getUserPosts } from './controllers/postController'
 import passportService from './config/passport'
 import express from 'express'
 import passport from 'passport'
@@ -35,9 +35,10 @@ function router (app) {
     res.status(200).send('This URL is only for admins!')
   })
 
-  router.post('/post', post)
+  router.post('/post', requireAuth, post)
 
   router.get('/posts', getPosts)
+  router.get('/posts/:userId', getUserPosts)
 
 
   app.use('/', router)
