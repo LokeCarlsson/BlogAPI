@@ -23,9 +23,6 @@ function post(req, res, next) {
 }
 
 function getPosts(req, res, next) {
-  const jwtToken = req.headers.authorization
-  console.log(req)
-
   const allPosts = []
   Post.find({})
   .exec((err, posts) => {
@@ -47,6 +44,39 @@ function getPosts(req, res, next) {
 }
 
 function getUserPosts(req, res, next) {
+  const username = req.params.username
+  const allPosts = []
+  let userId = ''
+
+  User.findOne({ 'username': username })
+  .select('_id')
+  .exec((err, result ) => {
+    if (!result)
+      return res.status(422).send({
+        error: 'No posts with that username exist'
+      })
+    userId = result._id
+    Post.find({ author: userId })
+    .exec((err, posts) => {
+      if (err) {
+        res.send({
+          error: err
+        })
+        return next(err)
+      }
+      posts.forEach((post) => {
+        allPosts.push(post)
+        if (allPosts.length === posts.length) {
+          return res.status(200).json({
+            posts: allPosts
+          })
+        }
+      })
+    })
+  })
+}
+
+function getUserIdPosts(req, res, next) {
   const user = req.params.userId
   const allPosts = []
   Post.find({ author: user })
@@ -71,5 +101,6 @@ function getUserPosts(req, res, next) {
 export {
   post,
   getPosts,
-  getUserPosts
+  getUserPosts,
+  getUserIdPosts
 }
