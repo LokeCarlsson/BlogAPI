@@ -1,5 +1,5 @@
 import { login, register, roleAuthorization } from './controllers/authController'
-import post from './controllers/postController'
+import { post, getPosts } from './controllers/postController'
 import passportService from './config/passport'
 import express from 'express'
 import passport from 'passport'
@@ -36,6 +36,8 @@ function router (app) {
   })
 
   router.post('/post', post)
+
+  router.get('/posts', getPosts)
 
 
   app.use('/', router)
