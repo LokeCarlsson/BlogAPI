@@ -1,6 +1,5 @@
 import Post from '../models/postModel'
 import User from '../models/userModel'
-import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 
 function post(req, res, next) {
   const image = req.body.image
@@ -48,7 +47,6 @@ function getPosts(req, res, next) {
 }
 
 function getUserPosts(req, res, next) {
-  console.log(req.params.userId)
   const user = req.params.userId
   const allPosts = []
   Post.find({ author: user })
