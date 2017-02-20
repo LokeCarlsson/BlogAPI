@@ -1,5 +1,5 @@
 import passport from 'passport'
-import user from '../models/user'
+import user from '../models/userModel'
 import config from './main'
 import LocalStrategy from 'passport-local'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'

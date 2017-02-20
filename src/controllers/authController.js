@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import User from '../models/user'
+import User from '../models/userModel'
 import config from '../config/main'
 
 function generateToken(user) {
@@ -14,7 +14,7 @@ function setUserInfo(request) {
     firstName: request.profile.firstName,
     lastName: request.profile.lastName,
     email: request.email,
-    role: request.role,
+    role: request.role
   }
 }
 
@@ -60,7 +60,7 @@ function register (req, res, next) {
   })
 }
 
-function login (req, res, next) {
+function login (req, res) {
   const userInfo = setUserInfo(req.user)
 
   res.status(200).json({

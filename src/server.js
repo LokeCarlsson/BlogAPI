@@ -2,14 +2,16 @@ import bodyParser 	from 'body-parser'
 import express 			from 'express'
 import config 			from './config/main'
 import router 			from './router'
-import morgan 			from 'morgan'
+// import morgan 			from 'morgan'
 import http 				from 'http'
 import cors 				from 'cors'
 import mongoose			from 'mongoose'
+import bluebird			from 'bluebird'
 
 let app = express()
 app.server = http.createServer(app)
 
+mongoose.Promise = bluebird
 mongoose.connect(config.database)
 
 // app.use(morgan('dev', {

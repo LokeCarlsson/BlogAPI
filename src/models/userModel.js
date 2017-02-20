@@ -22,7 +22,11 @@ const userSchema = new Schema({
     type: String,
     enum: ['Member', 'Admin'],
     default: 'Member'
-  }
+  },
+  posts : [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+  }]
 },
 {
   timestamps: true
@@ -57,4 +61,4 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
   })
 }
 
-module.exports = mongoose.model('User', userSchema)
+export default mongoose.model('User', userSchema)
