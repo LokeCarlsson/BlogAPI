@@ -28,11 +28,7 @@ const userSchema = new Schema({
     type: String,
     enum: ['Member', 'Admin'],
     default: 'Member'
-  },
-  posts : [{
-    type: Schema.Types.ObjectId,
-    ref: 'Post'
-  }]
+  }
 },
 {
   timestamps: true
