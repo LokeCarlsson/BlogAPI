@@ -151,6 +151,32 @@ const deletePost = (req, res, next) => {
   })
 }
 
+export const editPost = (req, res, next) => {
+  const postId = req.params.postId
+  Post.findOne({ _id: postId })
+  .exec((err, post) => {
+    if (!post)
+      return res.status(422).send({
+        error: 'No posts with that id exist'
+      })
+    if (post.author.equals(req.user._id)) {
+      const image = req.body.image || post.image
+      const title = req.body.title || post.title
+      const body = req.body.body || post.body
+      post.update({'image': image, 'title': title, 'body': body}, function(err, payload) {
+        if (err)
+          return next(err)
+        console.log(payload)
+        res.status(201).send('Post have been successfully saved!')
+      })
+    } else {
+      return res.status(422).send({
+        error: 'You can only edit your own posts'
+      })
+    }
+  })
+}
+
 export {
   post,
   getPosts,
