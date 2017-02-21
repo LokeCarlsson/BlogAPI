@@ -166,7 +166,6 @@ export const editPost = (req, res, next) => {
       post.update({'image': image, 'title': title, 'body': body}, function(err, payload) {
         if (err)
           return next(err)
-        console.log(payload)
         res.status(201).send('Post have been successfully saved!')
       })
     } else {
