@@ -11,7 +11,7 @@ function generateToken(user) {
 function setUserInfo(request) {
   return {
     _id: request._id,
-    username: request.userName,
+    username: request.username,
     firstName: request.profile.firstName,
     lastName: request.profile.lastName,
     email: request.email,
@@ -20,13 +20,13 @@ function setUserInfo(request) {
 }
 
 function register(req, res, next) {
-  const userName = req.body.userName
+  const username = req.body.username
   const email = req.body.email
   const firstName = req.body.firstName
   const lastName = req.body.lastName
   const password = req.body.password
 
-  if (!userName)
+  if (!username)
     return res.status(422).send({
       error: 'You must provide an username.'
     })
@@ -58,7 +58,7 @@ function register(req, res, next) {
       })
 
     let user = new User({
-      username: userName,
+      username: username,
       email: email,
       password: password,
       profile: {
@@ -93,7 +93,6 @@ function login(req, res) {
 function roleAuthorization(role) {
   return function(req, res, next) {
     const user = req.user
-
     User.findById(user._id, function(err, foundUser) {
       if (err) {
         res.status(422).json({
