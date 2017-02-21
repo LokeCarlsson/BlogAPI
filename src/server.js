@@ -15,7 +15,7 @@ mongoose.Promise = bluebird
 mongoose.connect(config.database)
 
 // app.use(morgan('dev', {
-//   skip: function (req, res) { return res.statusCode < 400 }
+//   skip: => (req, res) { return res.statusCode < 400 }
 // }))
 
 app.use(cors({
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 router(app)
 
-app.server.listen(config.port || 3000, function () {
+app.server.listen(config.port || 3000, () => {
 	console.log('Server listening on port ', config.port)
 })
 
