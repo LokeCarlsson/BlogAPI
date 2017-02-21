@@ -1,5 +1,5 @@
 import { login, register, roleAuthorization } from './controllers/authController'
-import { post, getPosts, getUserPosts, getUserIdPosts } from './controllers/postController'
+import { post, getAllPosts, getUserPosts, getUserIdPosts, deletePost, getPosts } from './controllers/postController'
 import passportService from './config/passport'
 import express from 'express'
 import passport from 'passport'
@@ -36,11 +36,16 @@ function router (app) {
   })
 
   router.post('/post', requireAuth, post)
-
-  router.get('/posts', getPosts)
+  router.delete('/posts/:postId', requireAuth, deletePost)
+  router.get('/posts', requireAuth, getPosts)
+  router.get('/posts/all', getAllPosts)
   router.get('/posts/:username', getUserPosts)
   router.get('/posts/id/:userId', getUserIdPosts)
 
+
+  router.get('/test', requireAuth, (req, res) => {
+    res.status(200).json(req.user)
+  })
 
   app.use('/', router)
 }
