@@ -1,7 +1,7 @@
 import Post from '../models/postModel'
 import User from '../models/userModel'
 
-function post(req, res, next) {
+const post = (req, res, next) => {
   const image = req.body.image
   const title = req.body.title
   const body = req.body.body
@@ -17,12 +17,11 @@ function post(req, res, next) {
   post.save(function(err) {
     if (err)
       return next(err)
-    else
-      res.status(201).send('Post have been successfully created!')
+    res.status(201).send('Post have been successfully created!')
   })
 }
 
-function getAllPosts(req, res, next) {
+const getAllPosts = (req, res, next) => {
   const allPosts = []
   Post.find({})
   .exec((err, posts) => {
@@ -43,14 +42,14 @@ function getAllPosts(req, res, next) {
   })
 }
 
-function getUserPosts(req, res, next) {
+const getUserPosts = (req, res, next) => {
   const username = req.params.username
   const allPosts = []
   let userId = ''
 
   User.findOne({ 'username': username })
   .select('_id')
-  .exec((err, result ) => {
+  .exec((err, result) => {
     if (!result)
       return res.status(422).send({
         error: 'No user with that name exist'
@@ -74,7 +73,7 @@ function getUserPosts(req, res, next) {
   })
 }
 
-function getUserIdPosts(req, res, next) {
+const getUserIdPosts = (req, res, next) => {
   const user = req.params.userId
   const allPosts = []
   Post.find({ author: user })
@@ -100,7 +99,7 @@ function getUserIdPosts(req, res, next) {
   })
 }
 
-function getPosts(req, res, next) {
+const getPosts = (req, res, next) => {
   const user = req.user._id
   const allPosts = []
   Post.find({ author: user })
@@ -126,7 +125,7 @@ function getPosts(req, res, next) {
   })
 }
 
-function deletePost(req, res, next) {
+const deletePost = (req, res, next) => {
   const postId = req.params.postId
   Post.findOne({ _id: postId })
   .exec((err, post) => {
@@ -135,7 +134,7 @@ function deletePost(req, res, next) {
         error: 'No posts with that id exist'
       })
     if (post.author.equals(req.user._id)) {
-      Post.findByIdAndRemove(postId, function (err, offer) {
+      Post.findByIdAndRemove(postId, function(err, offer) {
         if (err) {
           res.send({
             error: err
@@ -151,7 +150,6 @@ function deletePost(req, res, next) {
     }
   })
 }
-
 
 export {
   post,
