@@ -5,11 +5,11 @@ import LocalStrategy from 'passport-local'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 
 const localOptions = {
-  usernameField: 'email'
+  usernameField: 'username'
 }
 
-const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
-  user.findOne({ email }, (err, user) => {
+const localLogin = new LocalStrategy(localOptions, (username, password, done) => {
+  user.findOne({ username }, (err, user) => {
     if (err)
     return done(err)
 
