@@ -210,7 +210,7 @@ export const editPost = (req, res, next) => {
       const image = req.body.image || post.image
       const title = req.body.title || post.title
       const body = req.body.body || post.body
-      post.update({'image': image, 'title': title, 'body': body}, function(err, payload) {
+      post.update({'image': image, 'title': title, 'body': body}, (err, payload) => {
         if (err)
           return next(err)
         res.status(201).send('Post have been successfully saved!')
