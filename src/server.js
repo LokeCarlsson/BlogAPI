@@ -2,13 +2,12 @@ import bodyParser 	from 'body-parser'
 import express 			from 'express'
 import config 			from './config/main'
 import router 			from './router'
-import contentType  from './middlewares/contentType'
 import headers			from './middlewares/headers'
-// import morgan 			from 'morgan'
 import http 				from 'http'
 import cors 				from 'cors'
 import mongoose			from 'mongoose'
 import bluebird			from 'bluebird'
+// import morgan 			from 'morgan'
 
 let app = express()
 app.server = http.createServer(app)
@@ -26,9 +25,7 @@ app.use(cors({
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
 app.use(headers)
-app.use('*', contentType)
 
 router(app)
 

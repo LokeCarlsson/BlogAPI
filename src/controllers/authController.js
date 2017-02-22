@@ -2,13 +2,13 @@ import jwt from 'jsonwebtoken'
 import User from '../models/userModel'
 import config from '../config/main'
 
-function generateToken(user) {
+const generateToken = (user) => {
   return jwt.sign(user, config.secret, {
     expiresIn: 604800
   })
 }
 
-function setUserInfo(request) {
+const setUserInfo = (request) => {
   return {
     _id: request._id,
     username: request.username,
@@ -19,7 +19,7 @@ function setUserInfo(request) {
   }
 }
 
-function register(req, res, next) {
+const register = (req, res, next) => {
   const username = req.body.username
   const email = req.body.email
   const firstName = req.body.firstName
@@ -48,7 +48,7 @@ function register(req, res, next) {
 
   User.findOne({
     email: email
-  }, function(err, existingUser) {
+  }, (err, existingUser) => {
     if (err)
       return next(err)
 
@@ -67,7 +67,7 @@ function register(req, res, next) {
       }
     })
 
-    user.save(function(err, user) {
+    user.save((err, user) => {
       if (err)
         return next(err)
 
@@ -91,7 +91,7 @@ function login(req, res) {
 }
 
 function roleAuthorization(role) {
-  return function(req, res, next) {
+  return (req, res, next) => {
     const user = req.user
     User.findById(user._id, function(err, foundUser) {
       if (err) {
