@@ -4,6 +4,7 @@ import request from 'request'
 const registerHook = (req, res, next) => {
   const url = req.body.url
   const events = req.body.events
+  const secret = req.body.secret
   const owner = req.user
 
   if (!url)
@@ -14,6 +15,11 @@ const registerHook = (req, res, next) => {
   if (!events)
     return res.status(422).send({
       error: 'You must provide atleast one event.'
+    })
+
+  if (!secret)
+    return res.status(422).send({
+      error: 'You must provide a secret string.'
     })
 
   Hook.findOne({
@@ -30,6 +36,7 @@ const registerHook = (req, res, next) => {
     let hook = new Hook({
       url: url,
       events: events,
+      secret: secret,
       owner: owner
     })
 
@@ -104,7 +111,8 @@ const editHook = (req, res, next) => {
     if (hook.owner.equals(req.user._id)) {
       const url = req.body.url || hook.url
       const events = req.body.events || hook.events
-      hook.update({'url': url, 'events': events}, (err, payload) => {
+      const secret = req.body.secret || hook.secret
+      hook.update({'url': url, 'events': events, 'secret': secret}, (err, payload) => {
         if (err)
           return next(err)
         res.status(201).send('Hook have been successfully saved!')
@@ -124,23 +132,25 @@ const sendEvent = (event, post) => {
     'id': post._id,
     'title': post.title,
     'body': post.body,
-    'author': post.author.username
+    'author': {
+      'username': post.author.username,
+      'id': post.author._id
+    }
   }
   const eventType = event
   Hook.find({ events: event })
   .exec((err, hooks) => {
-    hooks.forEach((hook, i) => {
-      allHooks.push(hook)
-      if (allHooks.length === hooks.length) {
-        request.post({
-          json: true,
-          url: 'http://localhost:8080/test',
-          body
-        },
-        function (err, httpResponse, body) {
-          console.log(err)
-        })
-      }
+    hooks.forEach((hook) => {
+      body['secret'] = hook.secret
+      request.post({
+        json: true,
+        url: hook.url,
+        body
+      },
+      (err, httpResponse, body) => {
+        if (err)
+        console.log(err)
+      })
     })
   })
 }

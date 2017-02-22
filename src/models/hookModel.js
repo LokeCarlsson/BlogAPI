@@ -10,6 +10,10 @@ const hookSchema = new Schema({
   events: {
     type: Array
   },
+  secret: {
+    type: String,
+    required: true
+  },
   owner: {
     type: Schema.Types.ObjectId,
     ref: 'User'
