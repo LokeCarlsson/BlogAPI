@@ -2,6 +2,8 @@ import bodyParser 	from 'body-parser'
 import express 			from 'express'
 import config 			from './config/main'
 import router 			from './router'
+import contentType  from './middlewares/contentType'
+import headers			from './middlewares/headers'
 // import morgan 			from 'morgan'
 import http 				from 'http'
 import cors 				from 'cors'
@@ -25,13 +27,8 @@ app.use(cors({
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
-});
+app.use(headers)
+app.use('*', contentType)
 
 router(app)
 
