@@ -105,7 +105,9 @@ function roleAuthorization(role) {
         return next()
 
       res.status(401).json({
-        error: 'You are not authorized to view this content.'
+        error: 'You are not authorized to view this content.',
+        register: 'http://' + req.headers.host + '/register',
+        login: 'http://' + req.headers.host + '/login'
       })
       return next('Unauthorized')
     })

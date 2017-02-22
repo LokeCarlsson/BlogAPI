@@ -28,14 +28,17 @@ const post = (req, res, next) => {
   post.save(function(err) {
     if (err)
       return next(err)
-    res.status(201).send('Post have been successfully created!')
+    res.status(201).json({
+      message: 'Post have been successfully created!',
+      post: 'http://' + req.headers.host + '/post/' + post._id
+    })
     sendEvent('newPost', post)
   })
 }
 
 const getAllPosts = (req, res, next) => {
   const allPosts = []
-  Post.find({})
+  Post.find({}, '_id image title body author updatedAt createdAt', {lean: true})
   .exec((err, posts) => {
     if (err) {
       res.send({
@@ -44,7 +47,12 @@ const getAllPosts = (req, res, next) => {
       return next(err)
     }
     posts.forEach((post) => {
-      allPosts.push(post)
+      let url = {
+        url: 'http://' + req.headers.host + '/post/' + post._id,
+
+      }
+      let newObj = Object.assign({}, post, url)
+      allPosts.push(newObj)
       if (allPosts.length === posts.length) {
         return res.status(200).json({
           posts: allPosts
@@ -111,6 +119,33 @@ const getUserIdPosts = (req, res, next) => {
   })
 }
 
+const getIdPost = (req, res, next) => {
+  const postId = req.params.postId
+  Post.findById(postId, (err, post) => {
+    console.log(post);
+    if (err) {
+      res.send({
+        error: err
+      })
+      return next(err)
+    } else
+    if (post)
+      return res.status(200).json({
+        id: post._id,
+        image: post.image,
+        tile: post.title,
+        body: post.body,
+        authorId: post.author,
+        updatedAt: post.updatedAt,
+        createdAt: post.createdAt
+      })
+    else
+      return res.status(404).send({
+        error: 'You post found on this id!'
+      })
+  })
+}
+
 const getPosts = (req, res, next) => {
   const user = req.user._id
   const allPosts = []
@@ -126,7 +161,7 @@ const getPosts = (req, res, next) => {
       })
       return next(err)
     }
-    posts.forEach((post) => {
+    posts.forEach((post, i) => {
       allPosts.push(post)
       if (allPosts.length === posts.length) {
         return res.status(200).json({
@@ -191,6 +226,7 @@ export const editPost = (req, res, next) => {
 export {
   post,
   getPosts,
+  getIdPost,
   deletePost,
   getAllPosts,
   getUserPosts,

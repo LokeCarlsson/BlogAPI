@@ -146,10 +146,6 @@ const sendEvent = (event, post) => {
         json: true,
         url: hook.url,
         body
-      },
-      (err, httpResponse, body) => {
-        if (err)
-        console.log(err)
       })
     })
   })

@@ -1,5 +1,5 @@
 import { login, register, roleAuthorization } from './controllers/authController'
-import { post, getAllPosts, getUserPosts, getUserIdPosts, deletePost, getPosts, editPost } from './controllers/postController'
+import { post, getAllPosts, getUserPosts, getUserIdPosts, deletePost, getPosts, editPost, getIdPost } from './controllers/postController'
 import { registerHook, viewHook, editHook, deleteHook } from './controllers/hookController'
 import passportService from './config/passport'
 import contentType  from './middlewares/contentType'
@@ -15,6 +15,14 @@ const REQUIRE_ADMIN = "Admin"
 function router (app) {
   const router = express.Router()
 
+  router.get('/', (req, res) => {
+    res.status(200).json({
+      message: 'Welcome to my API',
+      register: 'http://' + req.headers.host + '/register',
+      login: 'http://' + req.headers.host + '/login'
+    })
+  })
+
   router.post('/register', contentType, register)
   router.get('/register', (req, res) => {
     res.status(405).send('Post on this URL to register!')
@@ -25,18 +33,6 @@ function router (app) {
     res.status(405).send('Post on this URL to login!')
   })
 
-  router.get('/protected', requireAuth, (req, res) => {
-    res.status(200).send('This URL is protected!')
-  })
-
-  router.get('/secret', requireAuth, (req, res) => {
-    res.status(200).send('This URL is secret!')
-  })
-
-  router.get('/admin', requireAuth, roleAuthorization(REQUIRE_ADMIN), (req, res) => {
-    res.status(200).send('This URL is only for admins!')
-  })
-
   router.post('/post', requireAuth, contentType, post)
   router.delete('/posts/:postId', requireAuth, deletePost)
   router.put('/posts/:postId', requireAuth, contentType, editPost)
@@ -44,6 +40,8 @@ function router (app) {
   router.get('/posts/all', getAllPosts)
   router.get('/posts/:username', getUserPosts)
   router.get('/posts/id/:userId', getUserIdPosts)
+  router.get('/post/:postId', getIdPost)
+
 
   router.post('/hook', requireAuth, contentType, registerHook)
   router.delete('/hook/:hookId', requireAuth, deleteHook)
@@ -57,6 +55,5 @@ function router (app) {
 
   app.use('/', router)
 }
-
 
 export default router
