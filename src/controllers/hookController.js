@@ -1,4 +1,5 @@
 import Hook from '../models/hookModel'
+import request from 'request'
 
 const registerHook = (req, res, next) => {
   const url = req.body.url
@@ -116,10 +117,38 @@ const editHook = (req, res, next) => {
   })
 }
 
+const sendEvent = (event, post) => {
+  const allHooks = []
+  const body = {
+    'eventType': event,
+    'id': post._id,
+    'title': post.title,
+    'body': post.body,
+    'author': post.author.username
+  }
+  const eventType = event
+  Hook.find({ events: event })
+  .exec((err, hooks) => {
+    hooks.forEach((hook, i) => {
+      allHooks.push(hook)
+      if (allHooks.length === hooks.length) {
+        request.post({
+          json: true,
+          url: 'http://localhost:8080/test',
+          body
+        },
+        function (err, httpResponse, body) {
+          console.log(err)
+        })
+      }
+    })
+  })
+}
 
 export {
   registerHook,
   deleteHook,
   viewHook,
-  editHook
+  editHook,
+  sendEvent
 }

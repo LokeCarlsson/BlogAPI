@@ -50,8 +50,9 @@ function router (app) {
   router.put('/hook/:hookId', requireAuth, contentType, editHook)
   router.get('/hook', requireAuth, viewHook)
 
-  router.get('/test', requireAuth, (req, res) => {
-    res.status(200).json(req.user)
+  router.post('/test', (req, res) => {
+    console.log('New post from hook:')
+    console.log(req.body)
   })
 
   app.use('/', router)

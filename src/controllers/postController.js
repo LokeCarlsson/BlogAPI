@@ -1,5 +1,6 @@
 import Post from '../models/postModel'
 import User from '../models/userModel'
+import { sendEvent } from '../controllers/hookController'
 
 const post = (req, res, next) => {
   const image = req.body.image
@@ -28,6 +29,7 @@ const post = (req, res, next) => {
     if (err)
       return next(err)
     res.status(201).send('Post have been successfully created!')
+    sendEvent('newPost', post)
   })
 }
 
