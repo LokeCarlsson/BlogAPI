@@ -81,8 +81,18 @@ const register = (req, res, next) => {
   })
 }
 
-function login(req, res) {
+const login = (req, res) => {
   const userInfo = setUserInfo(req.user)
+
+  if (!req.body.username)
+  return res.status(422).send({
+    error: 'You must provide an username.'
+  })
+
+  if (!req.body.password)
+  return res.status(422).send({
+    error: 'You must provide a password.'
+  })
 
   res.status(200).json({
     token: `JWT ${generateToken(userInfo)}`,
@@ -90,10 +100,10 @@ function login(req, res) {
   })
 }
 
-function roleAuthorization(role) {
+const roleAuthorization = (role) => {
   return (req, res, next) => {
     const user = req.user
-    User.findById(user._id, function(err, foundUser) {
+    User.findById(user._id, (err, foundUser) => {
       if (err) {
         res.status(422).json({
           error: 'No user was found.'
