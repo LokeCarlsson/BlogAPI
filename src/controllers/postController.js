@@ -25,7 +25,7 @@ const post = (req, res, next) => {
     author: author
   })
 
-  post.save(function(err) {
+  post.save((err) => {
     if (err)
       return next(err)
     res.status(201).json({
@@ -181,7 +181,7 @@ const deletePost = (req, res, next) => {
         error: 'No posts with that id exist'
       })
     if (post.author.equals(req.user._id)) {
-      Post.findByIdAndRemove(postId, function(err, offer) {
+      Post.findByIdAndRemove(postId, (err, offer) => {
         if (err) {
           res.send({
             error: err

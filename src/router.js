@@ -3,6 +3,7 @@ import { post, getAllPosts, getUserPosts, getUserIdPosts, deletePost, getPosts, 
 import { registerHook, viewHook, editHook, deleteHook } from './controllers/hookController'
 import passportService from './config/passport'
 import contentType  from './middlewares/contentType'
+import loginCheck  from './middlewares/loginCheck'
 import express from 'express'
 import passport from 'passport'
 
@@ -23,12 +24,12 @@ function router (app) {
     })
   })
 
-  router.post('/register', contentType, register)
+  router.post('/register', contentType, loginCheck, register)
   router.get('/register', (req, res) => {
     res.status(405).send('Post on this URL to register!')
   })
 
-  router.post('/login', requireLogin, contentType, login)
+  router.post('/login', contentType, loginCheck, requireLogin, login)
   router.get('/login', (req, res) => {
     res.status(405).send('Post on this URL to login!')
   })
@@ -51,6 +52,10 @@ function router (app) {
   router.post('/test', (req, res) => {
     console.log('New post from hook:')
     console.log(req.body)
+  })
+
+  router.get('*', (req, res) => {
+    res.status(404).send('Not found')
   })
 
   app.use('/', router)

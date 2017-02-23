@@ -14,7 +14,7 @@ const registerHook = (req, res, next) => {
 
   if (!events)
     return res.status(422).send({
-      error: 'You must provide atleast one event.'
+      error: 'You must provide one or more events.'
     })
 
   if (!secret)
