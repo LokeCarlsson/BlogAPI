@@ -8,6 +8,7 @@ const post = (req, res, next) => {
   const body = req.body.body
   const author = req.user
 
+
   if (!title)
     return res.status(422).send({
       error: 'You must provide a title.'
@@ -25,14 +26,16 @@ const post = (req, res, next) => {
     author: author
   })
 
+  let url = 'http://' + req.headers.host + '/post/' + post._id
+
   post.save((err) => {
     if (err)
       return next(err)
     res.status(201).json({
       message: 'Post have been successfully created!',
-      post: 'http://' + req.headers.host + '/post/' + post._id
+      post: url
     })
-    sendEvent('newPost', post)
+    sendEvent('newPost', post, url)
   })
 }
 
@@ -122,7 +125,6 @@ const getUserIdPosts = (req, res, next) => {
 const getIdPost = (req, res, next) => {
   const postId = req.params.postId
   Post.findById(postId, (err, post) => {
-    console.log(post);
     if (err) {
       res.send({
         error: err

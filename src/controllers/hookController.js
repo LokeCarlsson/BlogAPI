@@ -125,7 +125,7 @@ const editHook = (req, res, next) => {
   })
 }
 
-const sendEvent = (event, post) => {
+const sendEvent = (event, post, url) => {
   const allHooks = []
   const body = {
     'eventType': event,
@@ -135,7 +135,8 @@ const sendEvent = (event, post) => {
     'author': {
       'username': post.author.username,
       'id': post.author._id
-    }
+    },
+    'url': url
   }
   const eventType = event
   Hook.find({ events: event })
