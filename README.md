@@ -8,7 +8,7 @@ npm start
 
 
 
-#s# Frågor
+## Frågor
 
 ##### How have you implemented the idea of HATEOAS in your API? Motivate your choices and how it support the idea of HATEOAS!
 Jag har implementerat länkar i svaret på förfrågan som leder vidare användaren till olika förfrågningar. T.ex har jag lagt in så att när användaren skapar en ny post kommer svaret innehålla en länk till posten. Om man kör en get på start adressen så får man länkar för att registrera sig eller logga in.
