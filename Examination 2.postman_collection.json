@@ -51,7 +51,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"userName\":\"lokeboy3\", \"firstName\":\"Loke\", \"lastName\":\"Carlsson\", \"email\": \"loke.carlsson.lc3@gmail.com\", \"password\":\"password123\"}"
+					"raw": "{\"userName\":\"username\", \"firstName\":\"name\", \"lastName\":\"lastname\", \"email\": \"email@gmail.com\", \"password\":\"password123\"}"
 				},
 				"description": ""
 			},
@@ -84,7 +84,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"username\": \"lokeboy\", \"password\":\"password123\"}"
+					"raw": "{\"username\": \"username\", \"password\":\"password123\"}"
 				},
 				"description": ""
 			},
@@ -109,7 +109,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"image\": \"https://www.surf.co/images/y-tho.jpg?image=cdn\", \"title\":\"This is my title!!!!5555\", \"body\":\"This is my booty\"}"
+					"raw": "{\"image\": \"https://www.surf.co/images/y-tho.jpg?image=cdn\", \"title\":\"title\", \"body\":\"body\"}"
 				},
 				"description": ""
 			},
@@ -168,7 +168,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"image\": \"sfdsafsadf.jpg\", \"title\":\"safdfsd\", \"body\":\"sfdsafdfsd\"}"
+					"raw": "{\"image\": \"picture.jpg\", \"title\":\"title\", \"body\":\"body\"}"
 				},
 				"description": ""
 			},
@@ -216,7 +216,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGFhZWIwMzJiNGYwMzBhY2NlNzg0M2EiLCJmaXJzdE5hbWUiOiJMb2tlIiwibGFzdE5hbWUiOiJDYXJsc3NvbiIsImVtYWlsIjoibG9rZS5jYXJsc3Nvbi5sY0BnbWFpbC5jb20iLCJyb2xlIjoiTWVtYmVyIiwiaWF0IjoxNDg3NTk2MjkxLCJleHAiOjE0ODgyMDEwOTF9.9bH3Ji2a1WwhAMP-R8iZtPnKrrrMUk0v5M_YoqolamA",
+						"value": "{{jwt_token}}",
 						"description": ""
 					}
 				],
@@ -233,7 +233,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGFhZWIwMzJiNGYwMzBhY2NlNzg0M2EiLCJmaXJzdE5hbWUiOiJMb2tlIiwibGFzdE5hbWUiOiJDYXJsc3NvbiIsImVtYWlsIjoibG9rZS5jYXJsc3Nvbi5sY0BnbWFpbC5jb20iLCJyb2xlIjoiTWVtYmVyIiwiaWF0IjoxNDg3NTk2MjkxLCJleHAiOjE0ODgyMDEwOTF9.9bH3Ji2a1WwhAMP-R8iZtPnKrrrMUk0v5M_YoqolamA",
+						"value": "{{jwt_token}}",
 						"description": ""
 					}
 				],
