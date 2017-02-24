@@ -8,7 +8,6 @@ const post = (req, res, next) => {
   const body = req.body.body
   const author = req.user
 
-
   if (!title)
     return res.status(422).send({
       error: 'You must provide a title.'

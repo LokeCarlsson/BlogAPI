@@ -10,16 +10,6 @@ const localOptions = {
 }
 
 const localLogin = new LocalStrategy(localOptions, (username, password, done) => {
-  if (!username)
-    return res.status(422).send({
-      error: 'You must provide an username.'
-    })
-
-  if (!password)
-    return res.status(422).send({
-      error: 'You must provide a password.'
-    })
-
   user.findOne({ username }, (err, user) => {
     if (err)
     return done(err)

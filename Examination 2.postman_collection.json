@@ -1,0 +1,338 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Examination 2",
+		"_postman_id": "bbd9ec7f-a64e-0e44-2b78-2a0eaee0772f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/",
+			"request": {
+				"url": "localhost:8080/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{jwt_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.clearGlobalVariable(\"jwt_token\");\r",
+							"postman.setGlobalVariable(\"jwt_token\", data.token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userName\":\"lokeboy3\", \"firstName\":\"Loke\", \"lastName\":\"Carlsson\", \"email\": \"loke.carlsson.lc3@gmail.com\", \"password\":\"password123\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.clearGlobalVariable(\"jwt_token\");\r",
+							"postman.setGlobalVariable(\"jwt_token\", data.token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8080/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"lokeboy\", \"password\":\"password123\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/post",
+			"request": {
+				"url": "localhost:8080/post",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGFkNWI2YzAyNzA3NjI3YWI5OGM4MzgiLCJ1c2VybmFtZSI6Imxva2Vib3kiLCJmaXJzdE5hbWUiOiJMb2tlIiwibGFzdE5hbWUiOiJDYXJsc3NvbiIsImVtYWlsIjoibG9rZS5jYXJsc3Nvbi5sY0BnbWFpbC5jb20iLCJyb2xlIjoiTWVtYmVyIiwiaWF0IjoxNDg3NzU2MTQwLCJleHAiOjE0ODgzNjA5NDB9.s1D---DKJZfr6q_BAEPIyMJz_Txa27vpkD7jNc9ab-0",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"image\": \"https://www.surf.co/images/y-tho.jpg?image=cdn\", \"title\":\"This is my title!!!!5555\", \"body\":\"This is my booty\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/post/:id",
+			"request": {
+				"url": "localhost:8080/post/58ad5caa02707627ab98c83a",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{jwt_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/post/:id",
+			"request": {
+				"url": "localhost:8080/post/58ad5ca302707627ab98c839",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{jwt_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/post/:id",
+			"request": {
+				"url": "localhost:8080/post/58ad5ca302707627ab98c839",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{jwt_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"image\": \"sfdsafsadf.jpg\", \"title\":\"safdfsd\", \"body\":\"sfdsafdfsd\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/posts",
+			"request": {
+				"url": "localhost:8080/posts",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{jwt_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/posts/all",
+			"request": {
+				"url": "localhost:8080/posts/all",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{jwt_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/posts/:username",
+			"request": {
+				"url": "localhost:8080/posts/username",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGFhZWIwMzJiNGYwMzBhY2NlNzg0M2EiLCJmaXJzdE5hbWUiOiJMb2tlIiwibGFzdE5hbWUiOiJDYXJsc3NvbiIsImVtYWlsIjoibG9rZS5jYXJsc3Nvbi5sY0BnbWFpbC5jb20iLCJyb2xlIjoiTWVtYmVyIiwiaWF0IjoxNDg3NTk2MjkxLCJleHAiOjE0ODgyMDEwOTF9.9bH3Ji2a1WwhAMP-R8iZtPnKrrrMUk0v5M_YoqolamA",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/posts/id/:userId",
+			"request": {
+				"url": "localhost:8080/posts/id/58ad5b6c02707627ab98c838",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGFhZWIwMzJiNGYwMzBhY2NlNzg0M2EiLCJmaXJzdE5hbWUiOiJMb2tlIiwibGFzdE5hbWUiOiJDYXJsc3NvbiIsImVtYWlsIjoibG9rZS5jYXJsc3Nvbi5sY0BnbWFpbC5jb20iLCJyb2xlIjoiTWVtYmVyIiwiaWF0IjoxNDg3NTk2MjkxLCJleHAiOjE0ODgyMDEwOTF9.9bH3Ji2a1WwhAMP-R8iZtPnKrrrMUk0v5M_YoqolamA",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/hook",
+			"request": {
+				"url": "localhost:8080/hook",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{jwt_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"url\": \"http://localhost:8080/test\", \"events\": \"newPost\", \"secret\": \"MylittleSecret\" }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/hook",
+			"request": {
+				"url": "localhost:8080/hook",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{jwt_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"url\": \"http://localhost:8080/test\", \"events\": \"newPost\", \"secret\": \"MylittleSecret\" }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/hook",
+			"request": {
+				"url": "localhost:8080/hook/58adab0e0e847571ab9eca1a",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{jwt_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"url\": \"http://localhost:8080/test\", \"events\": \"newPost\", \"secret\": \"MylittleSecret\" }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/hook",
+			"request": {
+				"url": "localhost:8080/hook/58adab0e0e847571ab9eca1a",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{jwt_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

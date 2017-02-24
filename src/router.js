@@ -24,31 +24,37 @@ function router (app) {
     })
   })
 
+  // Register
   router.post('/register', contentType, loginCheck, register)
   router.get('/register', (req, res) => {
     res.status(405).send('Post on this URL to register!')
   })
 
+  // Login
   router.post('/login', contentType, loginCheck, requireLogin, login)
   router.get('/login', (req, res) => {
     res.status(405).send('Post on this URL to login!')
   })
 
+  // Individual posts
   router.post('/post', requireAuth, contentType, post)
-  router.delete('/posts/:postId', requireAuth, deletePost)
-  router.put('/posts/:postId', requireAuth, contentType, editPost)
+  router.get('/post/:postId', getIdPost)
+  router.delete('/post/:postId', requireAuth, deletePost)
+  router.put('/post/:postId', requireAuth, contentType, editPost)
+
+  // User posts
   router.get('/posts', requireAuth, getPosts)
   router.get('/posts/all', getAllPosts)
   router.get('/posts/:username', getUserPosts)
   router.get('/posts/id/:userId', getUserIdPosts)
-  router.get('/post/:postId', getIdPost)
 
-
+  // Hooks
   router.post('/hook', requireAuth, contentType, registerHook)
   router.delete('/hook/:hookId', requireAuth, deleteHook)
   router.put('/hook/:hookId', requireAuth, contentType, editHook)
   router.get('/hook', requireAuth, viewHook)
 
+  // Incoming hook events
   router.post('/test', (req, res) => {
     console.log('New post from hook:')
     console.log(req.body)
