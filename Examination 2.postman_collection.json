@@ -51,7 +51,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"userName\":\"username\", \"firstName\":\"name\", \"lastName\":\"lastname\", \"email\": \"email@gmail.com\", \"password\":\"password123\"}"
+					"raw": "{\"username\":\"username\", \"firstName\":\"name\", \"lastName\":\"lastname\", \"email\": \"email@gmail.com\", \"password\":\"password123\"}"
 				},
 				"description": ""
 			},
