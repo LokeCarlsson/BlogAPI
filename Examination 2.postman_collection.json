@@ -98,7 +98,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGFkNWI2YzAyNzA3NjI3YWI5OGM4MzgiLCJ1c2VybmFtZSI6Imxva2Vib3kiLCJmaXJzdE5hbWUiOiJMb2tlIiwibGFzdE5hbWUiOiJDYXJsc3NvbiIsImVtYWlsIjoibG9rZS5jYXJsc3Nvbi5sY0BnbWFpbC5jb20iLCJyb2xlIjoiTWVtYmVyIiwiaWF0IjoxNDg3NzU2MTQwLCJleHAiOjE0ODgzNjA5NDB9.s1D---DKJZfr6q_BAEPIyMJz_Txa27vpkD7jNc9ab-0",
+						"value": "{{jwt_token}}",
 						"description": ""
 					},
 					{
